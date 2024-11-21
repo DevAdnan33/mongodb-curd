@@ -1,5 +1,6 @@
 package com.curd.curd_with_mongodb.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,12 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    //private User user;
+    // ArrayList<String> jobs = new ArrayList<>(Arrays.asList("Web Developer",
+    // "Android Developer", "IOS Developer",
+    // "Graphic Designer", "Frontend Developer", "Backend Developer", "Full Stack
+    // Developer", "SEO Expert"));
+
+    ArrayList<String> jobs = new ArrayList<>();
 
     public void saveUser(User user) {
         userRepository.save(user);
@@ -38,5 +44,19 @@ public class UserService {
             existingUser.setAge(user.getAge());
             return userRepository.save(existingUser);
         }).orElseThrow(() -> new RuntimeException("User with ID " + id + " not found"));
+    }
+
+    public String saveJob(User user) {
+        jobs.addAll(user.getJobs());
+        return "Jobs added successfully";
+    }
+
+    public ArrayList<String> jobs() {
+        return jobs;
+    }
+
+    public String emptyList() {
+        jobs.removeAll(jobs);
+        return "List is now empty";
     }
 }

@@ -1,5 +1,8 @@
 package com.curd.curd_with_mongodb.Documents;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -13,7 +16,17 @@ public class User {
     private String id;
     private String name;
     private int age;
-    private String message;
+    private List<String> jobs;
+
+    public User() {
+    }
+
+    public User(String id, String name, int age, ArrayList<String> jobs) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.jobs = jobs;
+    }
 
     public String getId() {
         return id;
@@ -39,31 +52,24 @@ public class User {
         this.age = age;
     }
 
-    public String getMessage() {
-        return message;
+    public List<String> getJobs() {
+        return jobs;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public User() {
-    }
-
-    public User(String message) {
-        this.message = message;
-    }
-
-    public User(String id, String name, int age, String message) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-        this.message = message;
+    public void setJobs(List<String> jobs) {
+        this.jobs = jobs;
     }
 
     @Override
     public String toString() {
-        return "User [id=" + id + ", name=" + name + ", age=" + age + "]";
+        StringBuilder sb = new StringBuilder();
+        sb.append("User{");
+        sb.append("id=").append(id);
+        sb.append(", name=").append(name);
+        sb.append(", age=").append(age);
+        sb.append(", jobs=").append(jobs);
+        sb.append('}');
+        return sb.toString();
     }
 
 }

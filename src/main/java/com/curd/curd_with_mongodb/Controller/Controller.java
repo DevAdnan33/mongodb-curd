@@ -1,5 +1,6 @@
 package com.curd.curd_with_mongodb.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.curd.curd_with_mongodb.Documents.User;
 import com.curd.curd_with_mongodb.Service.UserService;
-
 
 @RestController
 public class Controller {
@@ -44,6 +44,21 @@ public class Controller {
     @PutMapping("/updateUser/{id}")
     public User updateUser(@PathVariable String id, @RequestBody User user) {
         return userService.updateUser(id, user);
+    }
+
+    @GetMapping("/get-jobs")
+    public ArrayList<String> getJobs() {
+        return userService.jobs();
+    }
+
+    @PostMapping("/save-job")
+    public String saveJob(@RequestBody User user) {
+        return userService.saveJob(user);
+    }
+
+    @GetMapping("empty-list")
+    public String emptyList() {
+        return userService.emptyList();
     }
 
 }
