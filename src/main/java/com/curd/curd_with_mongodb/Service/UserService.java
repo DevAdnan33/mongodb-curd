@@ -14,7 +14,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    private User user;
+    //private User user;
 
     public void saveUser(User user) {
         userRepository.save(user);
@@ -34,11 +34,9 @@ public class UserService {
 
     public User updateUser(String id, User user) {
         return userRepository.findById(id).map(existingUser -> {
-            // Update fields of the existing user
             existingUser.setName(user.getName());
             existingUser.setAge(user.getAge());
-            // Add other fields as needed
-            return userRepository.save(existingUser); // Save the updated user
+            return userRepository.save(existingUser);
         }).orElseThrow(() -> new RuntimeException("User with ID " + id + " not found"));
     }
 }
